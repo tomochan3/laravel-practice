@@ -23,9 +23,18 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // // グローバル制約
+        // Route::pattern('id', '[0-9]+');
 
         parent::boot();
+
+        //　明示的な結合
+        // Route::model('user', App\User::class);
+
+        // 依存解決ロジックのカスタマイズ
+        // Route::bind('user', function ($value) {
+        //     return App\User::where('name', $value)->firstOrFail();
+        // });
     }
 
     /**
