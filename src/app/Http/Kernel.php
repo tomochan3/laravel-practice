@@ -60,6 +60,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'check' => \App\Http\Middleware\CheckAge::class,
+        'role' => \App\Http\Middleware\CheckRole::class,
     ];
 
     /**
@@ -69,6 +71,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //middleware priority
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
