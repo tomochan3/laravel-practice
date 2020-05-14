@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Define the "web" routes for the application.
-     *
+     * ここでルートにmiddlewareのwebを呼び出して渡している
      * These routes all receive session state, CSRF protection, etc.
      *
      * @return void
