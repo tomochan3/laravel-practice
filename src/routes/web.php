@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +17,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('user', 'UserController@store');
+
+Route::put('user/{id}', 'UserController@update');
+
+Route::get('/', function (Request $request) {
+    return 'hello';
+});
+
+Route::get('path', 'UserController@path')->name('path');
+
+Route::post('post', 'UserController@post')->name('post');
+
+Route::get('psr','UserController@psr');
