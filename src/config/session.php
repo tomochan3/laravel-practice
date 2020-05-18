@@ -18,7 +18,16 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    /*　file - セッションはstorage/framework/sessionsに保存されます。
+    cookie - セッションは暗号化され安全なクッキーに保存されます。
+    database - セッションはリレーショナルデータベースへ保存されます。
+    memcached／redis - セッションはスピードの早いキャッシュベースの保存域に保存されます。
+    array - セッションはPHPの配列として保存されるだけで、リクエスト間で継続しません。
+    */
+    // 'driver' => env('SESSION_DRIVER', 'file'),
+
+    // カスタムセッションドライバの使用
+    'driver' => env('SESSION_DRIVER', 'mongo'),
 
     /*
     |--------------------------------------------------------------------------
