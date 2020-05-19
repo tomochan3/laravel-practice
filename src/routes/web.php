@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('post/create', 'PostController@create')->name('form');
+
+Route::post('confirm', 'PostController@store')->name('confirm');
+
+Route::get('validate', 'ValidateConfirmController@create')->name('validate_form');
+
+Route::post('validate_confirm', 'ValidateConfirmController@store')->name('validate_confirm');
