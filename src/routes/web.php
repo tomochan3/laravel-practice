@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Middleware\CheckAge;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// middleware confirm
+Route::get('/middleware_input', 'MiddlewareConfirmController@index')->name('middlewareInput');
+Route::post('/middleware_confirm', 'MiddlewareConfirmController@confirm')->name('middlewareConfirm')->middleware('check');
+Route::get('/middleware_redirect', 'MiddlewareConfirmController@redirect')->name('middlewareRedirect');
+// middlewareparameter confirm
+Route::get('/middleware_parameter', 'MiddlewareConfirmController@parameter')->name('middlewareParameter')->middleware('role:editor');
