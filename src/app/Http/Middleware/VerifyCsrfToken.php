@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 
+//　リクエスト中のトークンとセッションに保存されているトークンが一致するか、確認
 class VerifyCsrfToken extends Middleware
 {
     /**
@@ -14,11 +15,14 @@ class VerifyCsrfToken extends Middleware
     protected $addHttpCookie = true;
 
     /**
-     * The URIs that should be excluded from CSRF verification.
+     * CSRFバリデーションから除外するURI
      *
      * @var array
      */
     protected $except = [
-        //
+        // 学習用のuri 自動的にCSRFミドルウェアは無効になる
+        'stripe/*',
+        'http://example.com/foo/bar',
+        'http://example.com/foo/*',
     ];
 }

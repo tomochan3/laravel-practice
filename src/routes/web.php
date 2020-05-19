@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// csrf confirm
+Route::get('/csrf', function () {
+   return view('csrf_confirm');
+});

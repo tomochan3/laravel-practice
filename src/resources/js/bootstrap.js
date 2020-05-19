@@ -1,3 +1,4 @@
+//　ここでJSのAxios HTTPライブラリにより暗号化されたXSRF-TOKENクッキーの値を用いX-XSRF-TOKENヘッダを自動的に送信している
 window._ = require('lodash');
 
 /**
