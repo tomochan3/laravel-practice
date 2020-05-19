@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('user', 'UserController@show')->name('user');
+
+Route::get('home', function () {
+    // セッションから一つのデータを取得する
+    $value = session('key');
+
+    // デフォルト値を指定する場合
+    $value = session('key', 'default');
+
+    // セッションへ一つのデータを保存する
+    session(['key' => 'value']);
+
+    return session()->get('key');
+
+});
