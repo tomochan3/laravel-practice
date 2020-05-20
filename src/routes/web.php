@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('welcome/{locale}', function ($locale) {
+    // 現在のlocalの値を取得
+    $locale = App::getLocale();
+    if (App::isLocale('en')) {
+        App::setLocale($locale);
+        return view('english');
+    } elseif (App::isLocale('ja')) {
+        return view('japan');
+    }
+});
