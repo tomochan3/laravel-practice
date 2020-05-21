@@ -2,27 +2,31 @@
 
 namespace App\Providers;
 
+use App\Contracts\DowntimeNotifier;
+use App\Contracts\ServerProvider;
+use App\Services\DigitalOceanServerProvider;
+use App\Services\PingdomDowntimeNotifier;
+use App\Services\ServerToolsProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * 登録する必要のある全コンテナ結合
      *
-     * @return void
+     * @var array
      */
-    public function register()
-    {
-        //
-    }
+    public $bindings = [
+        ServerProvider::class => DigitalOceanServerProvider::class,
+    ];
 
     /**
-     * Bootstrap any application services.
+     * 登録する必要のある全コンテナシングルトン
      *
-     * @return void
+     * @var array
      */
-    public function boot()
-    {
-        //
-    }
+    public $singletons = [
+        DowntimeNotifier::class => PingdomDowntimeNotifier::class,
+        ServerToolsProvider::class => ServerToolsProvider::class,
+    ];
 }
