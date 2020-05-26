@@ -46,5 +46,15 @@ Route::get('profile', function() {
 // または以下にすると再確認までの時間を調節可能
 // })->middleware(['auth', 'auth.password_timeout']);
 
+// HTTP基本認証(basic認証)
+// HTTP基本認証により、専用の「ログイン」ページを用意しなくても手っ取り早くアプリケーションにユーザーをログインさせられます。
+// これを使用するには、ルートにauth.basicミドルウェアを付けてください。
+// auth.basicミドルウェアはLaravelフレームワークに含まれているので、定義する必要はありません。
+Route::get('profile', function() {
+    // 認証済みのユーザーのみが入れる
+})->middleware('auth.basic');
 
-
+// ステートレスなbasic認証
+Route::get('api/user', function() {
+    // 認証済みのユーザーのみが入れる
+})->middleware('auth.basic.once');
