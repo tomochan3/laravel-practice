@@ -43,7 +43,8 @@ class RegisterController extends Controller
 
     /**
      * Get a validator for an incoming registration request.
-     *
+     * アプリケーションの新しいユーザーに対するバリデーションルールで構成されています。
+     * 変更可能
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
@@ -58,7 +59,7 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
-     *
+     * DBの必要に合わせて変更可能
      * @param  array  $data
      * @return \App\User
      */
@@ -70,6 +71,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
 
     protected function guard()
     {
