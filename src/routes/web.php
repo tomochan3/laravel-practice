@@ -1,5 +1,5 @@
 <?php
-
+use App\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +18,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user', 'UserController@index')->name('user');
+
+// ミドルウェアによる認可
+Route::put('/post/{post}', function (Post $post) {
+    // 現在のユーザーはこのポストを更新できる
+})->middleware('can:update,post');
+
+// modelを必要としない方法
+Route::post('/post', function () {
+    // 現在のユーザーはポストを更新できる
+})->middleware('can:create,App\Post');

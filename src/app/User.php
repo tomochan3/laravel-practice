@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //  Userモデルによる確認
+    // if ($user->can('update', $post)) {
+    //     //
+    // }
 }
