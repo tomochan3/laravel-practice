@@ -7,6 +7,9 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class RegisterController extends Controller
 {
@@ -63,10 +66,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        /**
+         * 登録バリデーション後に、新ユーザーインスタンスの生成
+         * トークン生成
+         * @param  array  $data
+         * @return \App\User
+         */
+        // forcecreate モデルのfillabl/guardedプロパティの有無に関係なく、指定したattributeでレコードを作成する
+        return User::forceCreate([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'api_token' => Str::random(80),
         ]);
     }
 }

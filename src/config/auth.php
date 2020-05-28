@@ -44,7 +44,7 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
+            'hash' => true, // hash化する flaseだと平文のまま登録されてしまう
         ],
     ],
 
