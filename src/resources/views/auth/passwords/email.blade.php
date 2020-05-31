@@ -1,3 +1,4 @@
+{{-- パスワードリセットに必要なblade --}}
 @extends('layouts.app')
 
 @section('content')
