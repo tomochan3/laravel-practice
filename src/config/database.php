@@ -43,6 +43,32 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        // readwrite接続 insert、delete、updateを切り分ける設定
+        // readとwrite接続時の残りのデータベースオプションは、メインのmysql配列からマージされます。
+        // 'mysql' => [
+        //     'read' => [
+        //         'host' => [
+        //             '192.168.1.1',
+        //             '196.168.1.2',
+        //         ],
+        //     ],
+        //     'write' => [
+        //         'host' => [
+        //             '196.168.1.3',
+        //          ],
+        //     ],
+        // stickyオプションが有効なとき、現在のリクエストサイクルにデータベースに対して「書き込み(write)」処理が実行されると、
+        // すべての「読み込み(read)」操作で"write"接続が使われるようになります。これにより、あるリクエストサイクルで書き込んだデータが、同じリクエストでは確実にデータベースから即時読み込まれます。
+        //     'sticky'    => true, // オプショナル値 現在のリクエストサイクルでデータベースへ書き込まれたレコードを即時に読み込みます。
+        //     'driver'    => 'mysql',
+        //     'database'  => 'database',
+        //     'username'  => 'root',
+        //     'password'  => '',
+        //     'charset'   => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix'    => '',
+        // ],
+
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
