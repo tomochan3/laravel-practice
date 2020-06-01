@@ -13,8 +13,22 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        // if (Schema::hasTable('users')) {
+        //     return;
+        // }
+
+        // if (Schema::hasColumn('users', 'email')) {
+        //     return;
+        // }
+
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            // $table->dropColumn('votes'); // 消す
+            // $table->dropColumn(['votes', 'avatar', 'location']); // 消す
+            // $table->string('name', 50)->nullable()->change();
+            // $table->string('name', 50)->change();
+            // $table->renameColumn('name', 'hello');
+
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
