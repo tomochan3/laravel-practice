@@ -2,38 +2,48 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    /**
+     * ユーザーに関連する電話レコードを取得
+     */
+    public function phone()
+    {
+        return $this->hasOne('App\Phone');
+
+        // return $this->hasOne('App\Phone', 'foreign_key');
+
+        // return $this->hasOne('App\Phone', 'foreign_key', 'local_key');
+
+        $comment = App\Comment::find(1);
+
+        echo $comment->post->title;
+    }
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * userに所属する役目を取得
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    public function roles()
+    {
+        // return $this->belongsToMany('App\Role');
+        return $this->belongsToMany('App\Role', 'role_user');
+        return $this->belongsToMany('App\Role', 'role_user', 'user_id', 'role_id');
+        return $this->belongsToMany('App\Role')->withPivot('column1', 'column2');
+        return $this->belongsToMany('App\Role')->withTimestamps();
+        return $this->belongsToMany('App\Podcast')
+                ->as('subscription')
+                ->withTimestamps();
+    }
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * このコメントを所有するポストを取得
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function post()
+    {
+        return $this->belongsTo('App\Post', 'foreign_key');
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+        return $this->belongsTo('App\Post', 'foreign_key', 'other_key');
+    }
 }
