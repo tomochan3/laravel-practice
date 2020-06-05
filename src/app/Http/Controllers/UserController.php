@@ -84,6 +84,8 @@ class UserController extends Controller
         // コレクション中の同じタイプで同じ主キーを持つモデルは削除されます。
         $users = App\User::all();
         $users = $users->unique();
+
+
     }
 
 }
