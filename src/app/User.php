@@ -2,38 +2,65 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    /**
+     * ユーザーのファーストネームを取得
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getFirstNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * ユーザーのファーストネームを設定
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = strtolower($value);
+    }
+
+    /**
+     * 日付を変形する属性
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
+    protected $dates = [
+        'seen_at',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    // /**
+    //  * ネイティブなタイプへキャストする属性
+    //  *
+    //  * @var array
+    //  */
+    // protected $casts = [
+    //     'is_admin' => 'boolean',
+    // ];
+
+    // /**
+    //  * ネイティブなタイプへキャストする属性
+    //  *
+    //  * @var array
+    //  */
+    // protected $casts = [
+    //     'options' => 'array',
+    // ];
 
     /**
-     * The attributes that should be cast to native types.
+     * ネイティブのタイプへキャストする属性
      *
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:Y-m-d',
     ];
 }
