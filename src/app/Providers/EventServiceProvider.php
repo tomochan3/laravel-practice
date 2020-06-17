@@ -10,18 +10,19 @@ use Illuminate\Support\Facades\Event;
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * アプリケーションのイベントリスナをマップ
      *
      * @var array
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        'App\Events\OrderShipped' => [
+            'App\Listeners\SendShipmentNotification',
         ],
     ];
 
+
     /**
-     * Register any events for your application.
+     * アプリケーションの他のイベントを登録する
      *
      * @return void
      */
@@ -29,6 +30,35 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        Event::listen('event.name', function ($foo, $bar) {
+            //
+        });
+        // ワイルドカードリスナ
+        Event::listen('event.*', function ($eventName, array $data) {
+            //
+        });
+    }
+
+    /**
+     * イベントとリスナを自動的に検出するか指定
+     * デフォルトではこれが無効になっているから手動でtrueにしてあげる。
+     * こいつをオーバーライドする。こいつがtrueになっていると全てtrueになる
+     * @return bool
+     */
+    public function shouldDiscoverEvents()
+    {
+        return true;
+    }
+
+    /**
+     * イベントを見つけるために使用するリスナディレクトリの取得
+     * スキャンする追加のディレクトリを定義したい場合こいつをオーバーライドする
+     * @return array
+     */
+    protected function discoverEventsWithin()
+    {
+        return [
+            $this->app->path('Listeners'),
+        ];
     }
 }
